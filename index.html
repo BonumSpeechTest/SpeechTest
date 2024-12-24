@@ -86,8 +86,20 @@
         align-items: center;
         gap: 10px; /* Интервал между чекбоксом и текстом */
     }
+    .button-container button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        background-color: #28a745; /* Зеленый цвет кнопок */
+        color: #fff; /* Цвет текста */
+    }
+    .button-container button:hover {
+        background-color: #218838; /* Более темный зеленый при наведении */
+    }
     @media (max-width: 600px) {
-        .btn-next {
+        .button-container button {
             padding: 8px 16px;
             font-size: 14px;
         }
