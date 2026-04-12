@@ -5,111 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Анкета для родителей детей 1-7 лет</title>
     <style>
-    body { 
-        font-family: 'Arial', sans-serif; 
-        background-color: #f8f9fa; /* Светлый фон */
-        color: #212529; /* Основной цвет текста */
-        margin: 0; 
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-    .container { 
-        background-color: #ffffff; /* Белый цвет контейнера */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
-        padding: 20px; 
-        border-radius: 8px; 
-        width: 80%; 
-        max-width: 600px;
-        text-align: center;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 80vh;
-    }
-    h1, h2 {
-        font-size: 24px;
-        color: #28a745; /* Зеленый цвет заголовков */
-    }
-    p, label {
-        font-size: 16px;
-        margin: 15px 0;
-    }
-    input[type="date"], input[type="checkbox"], input[type="radio"] {
-        margin-bottom: 20px;
-    }
-    button {
-        background-color: #28a745; /* Зеленый цвет кнопок */
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 4px;
-        font-size: 16px;
-    }
-    button:hover {
-        background-color: #218838; /* Более темный зеленый при наведении */
-    }
-    .hidden { 
-        display: none !important; 
-    }
-    .checkbox-label {
-        display: block;
-        text-align: left;
-    }
-    .btn-back {
-        align-self: flex-start;
-    }
-    .btn-next {
-        align-self: flex-end;
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #28a745; /* Зеленый цвет кнопки */
-        color: #fff; /* Цвет текста */
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    .btn-next:hover {
-        background-color: #218838; /* Более темный зеленый при наведении */
-    }
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-    .checkbox-label {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Интервал между чекбоксом и текстом */
-    }
-    .button-container button {
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 4px;
-        border: none;
-        cursor: pointer;
-        background-color: #28a745; /* Зеленый цвет кнопок */
-        color: #fff; /* Цвет текста */
-    }
-    .button-container button:hover {
-        background-color: #218838; /* Более темный зеленый при наведении */
-    }
-    @media (max-width: 600px) {
-        .button-container button {
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-    }
+:root{--text:#16202a;--muted:#5f6b76;--border:#d9e2ea;--primary:#1f8f5f;--primary-hover:#17704a;--shadow:0 18px 40px rgba(24,39,75,.12);--radius-xl:24px;--radius-lg:18px;--radius-md:14px}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top left,#eef8f2 0%,transparent 32%),radial-gradient(circle at top right,#edf4ff 0%,transparent 28%),linear-gradient(180deg,#f8fbfd 0%,#eef3f8 100%);color:var(--text);margin:0;padding:24px 12px;display:flex;justify-content:center;align-items:flex-start;min-height:100vh}
+.container{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.75);padding:28px 24px;border-radius:var(--radius-xl);width:min(100%,760px);text-align:center;position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:min(86vh,900px);overflow:hidden}
+.container::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:6px;background:linear-gradient(90deg,#80d5a8 0%,#1f8f5f 55%,#156042 100%)}
+h1,h2{margin:0;line-height:1.2;color:var(--text);letter-spacing:-.02em}
+h1{font-size:clamp(28px,3vw,38px);text-align:center} h2{font-size:clamp(24px,2.5vw,32px)}
+p{font-size:16px;line-height:1.65;margin:0;color:var(--muted)}
+label{font-size:15px;line-height:1.55;color:var(--text);margin:0}
+.container>label:not(:has(input)){font-weight:600;margin-bottom:-4px}
+input[type="date"]{width:100%;min-height:52px;border:1px solid var(--border);background:#fff;color:var(--text);border-radius:var(--radius-md);padding:12px 14px;font-size:16px;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+input[type="date"]:focus{border-color:rgba(31,143,95,.55);box-shadow:0 0 0 4px rgba(31,143,95,.12)}
+input[type="checkbox"],input[type="radio"]{accent-color:var(--primary);margin:2px 0 0;transform:scale(1.1);flex-shrink:0}
+label:has(input[type="radio"]),.checkbox-label{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius-md);background:#fff;text-align:left;transition:background-color .2s ease,border-color .2s ease}
+label:has(input[type="radio"]):hover,.checkbox-label:hover{background:#f9fbfd;border-color:#bfd3c4}
+.small-font{font-size:14px}
+button{background-color:var(--primary);color:#fff;border:none;min-height:48px;padding:0 20px;cursor:pointer;border-radius:999px;font-size:15px;font-weight:600;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
+button:hover{background-color:var(--primary-hover);transform:translateY(-1px)}
+.btn-back{align-self:flex-start;background:#edf2f5;color:var(--text)}
+.btn-back:hover{background:#e2e9ee}
+.btn-next{align-self:flex-end;box-shadow:0 10px 22px rgba(31,143,95,.22)}
+.button-container{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;margin-top:auto;padding-top:6px}
+.button-container button{padding:0 20px;font-size:15px}
+#page8Questions,#page9Questions{display:flex;flex-direction:column;gap:10px}
+#conclusion{border:1px solid #d8e7de;background:linear-gradient(180deg,#fbfffc 0%,#f5fbf7 100%);border-radius:var(--radius-lg);padding:18px;line-height:1.65;color:var(--text)}
+.hidden{display:none!important}
+@media (max-width:700px){body{padding:10px}.container{width:100%;min-height:calc(100vh - 20px);padding:22px 16px;border-radius:20px}.button-container{flex-direction:column-reverse;align-items:stretch}.button-container button{width:100%}}
+.accent {
+    color: #1f8f5f;
+    font-weight: 700;
+}
 </style>
 </head> 
 <body>
     <!-- Страница 1 -->
     <div id="page1" class="container">
-        <h1>АНКЕТА ДЛЯ РОДИТЕЛЕЙ ДЕТЕЙ 1-7 лет</h1>
+        <h1>
+  Анкета для родителей детей <br>
+  <span class="accent">1–7 лет</span>
+</h1>
         <p>Уважаемые родители! Эта анкета поможет вам определить, есть ли проблемы с речью у вашего ребенка, и составить «программу первых шагов» для их решения.</p>
         <label for="surveyDate">Дата анкетирования:</label>
         <input type="date" id="surveyDate">
