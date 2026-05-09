@@ -78,7 +78,7 @@
   </div>
 
   <div id="page25" class="container hidden">
-    <h2>Результат скрининга</h2>
+    <h2>Результаты и рекомендации</h2>
     <div id="conclusion" class="result-box"></div>
     <div class="button-container"><button class="btn-back" onclick="goBackFromResult()">Назад</button><button class="btn-next" onclick="resetForm()">Повторить тестирование</button></div>
   </div>
@@ -282,15 +282,15 @@ const outputLabels = [
 ];
 
 const outputNames = {
-  norm: "Возрастная норма",
-  mild_speech_issue: "Легкие речевые трудности",
-  moderate_speech_issue: "Умеренно выраженные речевые трудности",
-  severe_speech_issue: "Выраженные речевые трудности",
-  mild_delay: "Незначительное отставание речевого развития",
-  speech_delay: "Отставание речевого развития",
-  pronunciation_issue: "Нарушение произносительной стороны речи",
-  voice_issue: "Вероятное расстройство голоса",
-  fluency_issue: "Нарушение темпо-ритмической стороны речи",
+  norm: "Развитие речи находится в пределах возрастной нормы",
+  mild_speech_issue: "Вероятно легкое речевое расстройство",
+  moderate_speech_issue: "Вероятно умеренно выраженное речевое расстройство",
+  severe_speech_issue: "Вероятны выраженные речевые расстройства",
+  mild_delay: "Вероятно незначительное отставание речевого развития",
+  speech_delay: "Вероятно отставание речевого развития",
+  pronunciation_issue: "Вероятно расстройство произносительной стороны речи",
+  voice_issue: "Вероятно расстройство голоса",
+  fluency_issue: "Вероятно расстройство темпо-ритмической стороны речи",
   speech_therapist: "Консультация логопеда",
   neurologist: "Консультация невролога",
   surdologist: "Консультация сурдолога",
@@ -298,9 +298,9 @@ const outputNames = {
   ent: "Консультация отоларинголога",
   psychologist: "Консультация психолога",
   psychiatrist: "Консультация психиатра",
-  autism_screening: "Дополнительный скрининг коммуникативного развития",
-  specialized_center: "Обследование в специализированном центре патологии речи",
-  specialized_psychiatric_center: "Обследование в профильном специализированном центре"
+  autism_screening: "Онлайн-опросник M-CHAT-R",
+  specialized_center: "Областной детский центр патологии речи",
+  specialized_psychiatric_center: "Филиал «Детство» СОКПБ"
 };
 
 async function loadModel(){
@@ -364,6 +364,7 @@ function activeOutputs(outputMap, threshold = 0.5){
 }
 
 function calculateFollowUpMonths(){
+  if(ageInMonths <= 12) return 1;
   if(ageInMonths <= 24) return 3;
   if(ageInMonths <= 36) return 6;
   return 12;
@@ -372,24 +373,41 @@ function calculateFollowUpMonths(){
 function buildMainConclusion(outputMap){
   if(outputMap.norm >= 0.5 && outputMap.severe_speech_issue < 0.5 && outputMap.speech_delay < 0.5){
     return {
-      text: 'Развитие речи ребенка находится в пределах возрастной нормы.',
+      text: 'Развитие речи Вашего ребенка находится в пределах возрастной нормы.',
       className: ''
     };
   }
 
-  if(
-    outputMap.severe_speech_issue >= 0.5 ||
-    outputMap.specialized_center >= 0.5 ||
-    outputMap.specialized_psychiatric_center >= 0.5
-  ){
+  if(outputMap.severe_speech_issue >= 0.5){
     return {
-      text: 'Выявлены выраженные признаки риска речевых нарушений. Рекомендуется очное комплексное обследование.',
+      text: 'Вероятны выраженные речевые расстройства.',
       className: 'danger'
     };
   }
 
+  if(outputMap.moderate_speech_issue >= 0.5){
+    return {
+      text: 'Вероятно умеренно выраженное речевое расстройство.',
+      className: 'warn'
+    };
+  }
+
+  if(outputMap.mild_speech_issue >= 0.5){
+    return {
+      text: 'Вероятно легкое речевое расстройство.',
+      className: 'warn'
+    };
+  }
+
+  if(outputMap.speech_delay >= 0.5){
+    return {
+      text: 'Вероятно отставание речевого развития.',
+      className: 'warn'
+    };
+  }
+
   return {
-    text: 'Выявлены признаки риска речевых трудностей. Рекомендуется очная консультация специалиста.',
+    text: 'По результатам анкетирования рекомендуется очная консультация специалиста.',
     className: 'warn'
   };
 }
@@ -419,56 +437,66 @@ function buildDiagnosticFindings(outputMap){
 
 function buildRecommendations(outputMap){
   const recs = [];
+  const add = (text) => {
+    if(text && !recs.includes(text)) recs.push(text);
+  };
 
-  if(outputMap.surdologist >= 0.5){
-    recs.push('Рекомендуется консультация сурдолога.');
+  // 1. Сервисная логика, которая была в старом тесте и не должна зависеть только от нейросети
+  if(outputMap.norm >= 0.5){
+    add('Продолжайте наблюдать за речевым развитием ребенка в динамике.');
   }
 
+  if(answers.currentSpeechTherapy === 'yes'){
+    add('Продолжайте занятия с логопедом.');
+  } else if(outputMap.speech_therapist >= 0.5){
+    add('Рекомендуется консультация логопеда.');
+  }
+
+  // Если занятия идут, но положительная динамика низкая, сохраняем старую логику рекомендации невролога
+  if(answers.improvementAvailable && (answers.scales.improvement ?? 10) <= 4){
+    add('При отсутствии выраженной положительной динамики рекомендуется консультация невролога.');
+  }
+
+  // 2. Рекомендации по слуху из старого теста
   if(outputMap.hearing_test >= 0.5){
-    recs.push('Рекомендуется инструментальная проверка слуха.');
+    add('Рекомендуется консультация отоларинголога – сурдолога с проведением инструментального обследования слуха.');
+  } else if(outputMap.surdologist >= 0.5){
+    add('Необходимо проверить слух. Нужна консультация сурдолога.');
   }
 
-  if(outputMap.speech_therapist >= 0.5){
-    if(answers.currentSpeechTherapy === 'yes'){
-      recs.push('Рекомендуется продолжать занятия с логопедом.');
-    } else {
-      recs.push('Рекомендуется консультация логопеда.');
-    }
-  }
-
+  // 3. Специалисты
   if(outputMap.neurologist >= 0.5){
-    recs.push('Рекомендуется консультация невролога.');
+    add('Рекомендуется консультация невролога.');
   }
 
   if(outputMap.ent >= 0.5){
-    recs.push('Рекомендуется консультация отоларинголога.');
+    add('Рекомендуется консультация отоларинголога.');
   }
 
   if(outputMap.psychologist >= 0.5){
-    recs.push('Рекомендуется консультация психолога.');
+    add('Рекомендуется консультация психолога.');
   }
 
   if(outputMap.psychiatrist >= 0.5){
-    recs.push('Рекомендуется консультация психиатра.');
+    add('Рекомендуется консультация психиатра.');
   }
 
+  // 4. M-CHAT-R из старой версии теста
   if(outputMap.autism_screening >= 0.5){
-    recs.push('Рекомендуется пройти дополнительный скрининг коммуникативного развития, например онлайн-опросник M-CHAT-R: <a href="https://test.autism.help/" target="_blank" rel="noopener noreferrer">https://test.autism.help/</a>');
+    add('Рекомендуем пройти онлайн-версию опросника M-CHAT-R, который позволяет определить риск аутизма у ребенка: <a href="https://test.autism.help/" target="_blank" rel="noopener noreferrer">https://test.autism.help/</a>');
   }
 
-  if(outputMap.specialized_center >= 0.5){
-    recs.push('Целесообразно обследование в областном детском центре патологии речи.');
-  }
-
+  // 5. Специализированные центры из старой версии теста
   if(outputMap.specialized_psychiatric_center >= 0.5){
-    recs.push('Целесообразно обследование в профильном специализированном центре, например в филиале «Детство» СОКПБ.');
+    add('Целесообразно обследование в областном детском центре патологии речи или филиале «Детство» СОКПБ.');
+  } else if(outputMap.specialized_center >= 0.5){
+    add('Целесообразно обследование в областном детском центре патологии речи.');
   }
 
-  if(recs.length === 0 || outputMap.norm >= 0.5){
-    recs.push(`Рекомендуется повторное анкетирование через ${calculateFollowUpMonths()} месяцев.`);
-  }
+  // 6. Повторное анкетирование: сервисная рекомендация, сохраняется для любого результата
+  add(`Рекомендуем провести повторное анкетирование через ${calculateFollowUpMonths()} месяцев.`);
 
-  return [...new Set(recs)];
+  return recs;
 }
 
 function buildProbabilityBadges(outputMap){
@@ -491,24 +519,15 @@ async function calculateResults(){
     const main = buildMainConclusion(outputMap);
     const findings = buildDiagnosticFindings(outputMap);
     const recs = buildRecommendations(outputMap);
-    const badges = buildProbabilityBadges(outputMap);
-
     const findingsHtml = findings.length
       ? `<h3>Предварительные выводы</h3><ul>${findings.map(item => `<li>${item}</li>`).join('')}</ul>`
       : '';
 
     document.getElementById('conclusion').innerHTML = `
       <h3 class="${main.className}">${main.text}</h3>
-      <p>Возраст ребенка: <b>${ageInMonths} мес.</b></p>
-      <p>Интегральный показатель отставания по активной речи: <b>${answers.activeDelay}</b>. По пассивной речи: <b>${answers.passiveDelay}</b>.</p>
       ${findingsHtml}
       <h3>Рекомендации</h3>
       <ul>${recs.map(r => `<li>${r}</li>`).join('')}</ul>
-      <h3>Выходы нейросетевой модели</h3>
-      <div>${badges}</div>
-      <h3>Входной вектор для нейросети</h3>
-      <p>13 признаков кодируются четырехразрядно. Длина входного вектора: <b>${vector.length}</b>.</p>
-      <div class="mono">${vector.join('')}</div>
     `;
 
     console.log('Входной вектор:', vector);
