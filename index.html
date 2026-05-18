@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<!-- parent-facing version v3: technical ML blocks hidden -->
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Анкета для родителей детей 1–7 лет</title>
+  <style>
+    :root{--text:#16202a;--muted:#5f6b76;--border:#d9e2ea;--primary:#1f8f5f;--primary-hover:#17704a;--shadow:0 18px 40px rgba(24,39,75,.12);--radius-xl:24px;--radius-lg:18px;--radius-md:14px;--soft:#f4faf6;--warn:#fff7e8;--danger:#fff0f0}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top left,#eef8f2 0%,transparent 32%),radial-gradient(circle at top right,#edf4ff 0%,transparent 28%),linear-gradient(180deg,#f8fbfd 0%,#eef3f8 100%);color:var(--text);margin:0;padding:24px 12px;display:flex;justify-content:center;align-items:flex-start;min-height:100vh}
+    .container{background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.75);padding:28px 24px;border-radius:var(--radius-xl);width:min(100%,820px);text-align:center;position:relative;display:flex;flex-direction:column;gap:18px;min-height:min(86vh,900px);overflow:hidden}
+    .container::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:6px;background:linear-gradient(90deg,#80d5a8 0%,#1f8f5f 55%,#156042 100%)}
+    h1,h2,h3{margin:0;line-height:1.2;color:var(--text);letter-spacing:-.02em} h1{font-size:clamp(28px,3vw,38px)} h2{font-size:clamp(23px,2.4vw,31px)} h3{font-size:18px;text-align:left;margin:8px 0 0}
+    p{font-size:16px;line-height:1.65;margin:0;color:var(--muted)} label{font-size:15px;line-height:1.55;color:var(--text);margin:0}.accent{color:var(--primary);font-weight:700}.hidden{display:none!important}
+    input[type="date"]{width:100%;min-height:52px;border:1px solid var(--border);background:#fff;color:var(--text);border-radius:var(--radius-md);padding:12px 14px;font-size:16px;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+    input[type="date"]:focus{border-color:rgba(31,143,95,.55);box-shadow:0 0 0 4px rgba(31,143,95,.12)}
+    input[type="checkbox"],input[type="radio"]{accent-color:var(--primary);margin:2px 0 0;transform:scale(1.1);flex-shrink:0}.checkbox-label,.radio-label{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius-md);background:#fff;text-align:left;transition:background-color .2s ease,border-color .2s ease}.checkbox-label:hover,.radio-label:hover{background:#f9fbfd;border-color:#bfd3c4}
+    .field{display:flex;flex-direction:column;gap:8px;text-align:left}.scale-card{border:1px solid var(--border);border-radius:var(--radius-lg);background:#fff;padding:18px;text-align:left}.score-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}.score-value{font-size:38px;font-weight:800;color:var(--primary);line-height:1}.range{width:100%;accent-color:var(--primary);height:34px}.scale-table{display:grid;grid-template-columns:54px 1fr;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:14px}.scale-table div{padding:8px 10px;border-bottom:1px solid var(--border);font-size:13px;line-height:1.35}.scale-table div:nth-last-child(-n+2){border-bottom:none}.scale-num{background:#f4f7fa;font-weight:800;text-align:center;color:var(--primary)}.current-desc{border:1px solid #d8e7de;background:linear-gradient(180deg,#fbfffc 0%,#f5fbf7 100%);border-radius:14px;padding:14px;margin-top:12px;color:var(--text);font-weight:600}
+    .button-container{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;margin-top:auto;padding-top:6px}button{background-color:var(--primary);color:#fff;border:none;min-height:48px;padding:0 20px;cursor:pointer;border-radius:999px;font-size:15px;font-weight:700;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}button:hover{background-color:var(--primary-hover);transform:translateY(-1px)}.btn-back{background:#edf2f5;color:var(--text)}.btn-back:hover{background:#e2e9ee}.btn-next{box-shadow:0 10px 22px rgba(31,143,95,.22)}
+    .progress{height:8px;background:#e6edf2;border-radius:999px;overflow:hidden}.progress span{display:block;height:100%;background:var(--primary);width:0%}#page8Questions,#page9Questions{display:flex;flex-direction:column;gap:10px}.result-box{border:1px solid #d8e7de;background:linear-gradient(180deg,#fbfffc 0%,#f5fbf7 100%);border-radius:var(--radius-lg);padding:18px;line-height:1.65;color:var(--text);text-align:left}.badge{display:inline-flex;border-radius:999px;padding:8px 12px;background:var(--soft);color:var(--primary);font-weight:800;margin:4px}.badge.warn{background:var(--warn);color:#8a5a00}.badge.danger{background:var(--danger);color:#9f2d2d}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;background:#f6f8fa;border:1px solid var(--border);border-radius:12px;padding:12px;overflow:auto;max-height:180px;word-break:break-all}
+    @media (max-width:700px){body{padding:10px}.container{width:100%;min-height:calc(100vh - 20px);padding:22px 16px;border-radius:20px}.button-container{flex-direction:column-reverse;align-items:stretch}.button-container button{width:100%}.scale-table{grid-template-columns:44px 1fr}}
+  </style>
+</head>
+<body>
+  <div id="page1" class="container">
+    <h1>Анкета для родителей детей <br><span class="accent">1–7 лет</span></h1>
+    <p>Уважаемые родители! Эта анкета помогает провести предварительный скрининг речевого развития вашего ребенка, и составить «программу первых шагов» для их решения.</p>
+    <div class="field"><label for="surveyDate"><b>Дата анкетирования:</b></label><input type="date" id="surveyDate"></div>
+    <div class="button-container"><span></span><button class="btn-next" onclick="goToPage(2)">Далее</button></div>
+  </div>
+
+  <div id="page2" class="container hidden">
+    <h2>Возраст ребенка</h2>
+    <p>Пожалуйста, введите дату рождения вашего ребенка.</p>
+    <div class="field"><label for="birthDate"><b>Дата рождения ребенка:</b></label><input type="date" id="birthDate"><p id="birthDateError" style="color:#9f2d2d;font-weight:700;display:none;"></p></div>
+    <div class="button-container"><button class="btn-back" onclick="goBackToPage()">Назад</button><button class="btn-next" onclick="if(validateBirthDate()) goToScalePage(0)">Далее</button></div>
+  </div>
+
+  <div id="scalePage" class="container hidden">
+    <div class="progress"><span id="scaleProgress"></span></div>
+    <h2 id="scaleTitle"></h2>
+    <p id="scaleSubtitle"></p>
+    <div class="scale-card">
+      <div class="score-row"><b>Оценка по шкале 0–10</b><span id="scaleValue" class="score-value">5</span></div>
+      <input id="scaleInput" class="range" type="range" min="0" max="10" step="1" value="5" oninput="updateScaleValue(this.value)">
+      <div id="currentDesc" class="current-desc"></div>
+      <div id="scaleTable" class="scale-table"></div>
+    </div>
+    <div class="button-container"><button class="btn-back" onclick="scaleBack()">Назад</button><button class="btn-next" onclick="scaleNext()">Далее</button></div>
+  </div>
+
+  <div id="page8" class="container hidden">
+    <div class="progress"><span style="width:50%"></span></div>
+    <h2>Оценка уровня развития активной речи</h2>
+    <p>Отметьте галочкой утверждения, которые соответствуют вашему ребенку.</p>
+    <div id="page8Questions"></div>
+    <div class="button-container"><button class="btn-back" onclick="goToScalePage(4, false)">Назад</button><button class="btn-next" onclick="goToPage(9)">Далее</button></div>
+  </div>
+
+  <div id="page9" class="container hidden">
+    <div class="progress"><span style="width:60%"></span></div>
+    <h2>Оценка уровня развития пассивной речи</h2>
+    <p>Отметьте галочкой утверждения, которые соответствуют вашему ребенку.</p>
+    <div id="page9Questions"></div>
+    <div class="button-container"><button class="btn-back" onclick="goToPage(8)">Назад</button><button class="btn-next" onclick="goToScalePage(5)">Далее</button></div>
+  </div>
+
+  <div id="page17" class="container hidden">
+    <div class="progress"><span style="width:80%"></span></div>
+    <h2>Обращались ли вы к логопеду с ребенком?</h2>
+    <label class="radio-label"><input type="radio" name="speechTherapist" value="yes"> Да</label>
+    <label class="radio-label"><input type="radio" name="speechTherapist" value="no"> Нет</label>
+    <div class="button-container"><button class="btn-back" onclick="goToScalePage(7)">Назад</button><button class="btn-next" onclick="handleSpeechTherapist()">Далее</button></div>
+  </div>
+
+  <div id="page18" class="container hidden">
+    <div class="progress"><span style="width:90%"></span></div>
+    <h2>Ребенок занимается с логопедом в настоящее время?</h2>
+    <label class="radio-label"><input type="radio" name="currentSpeechTherapy" value="yes"> Да</label>
+    <label class="radio-label"><input type="radio" name="currentSpeechTherapy" value="no"> Нет</label>
+    <div class="button-container"><button class="btn-back" onclick="goToPage(17)">Назад</button><button class="btn-next" onclick="handleCurrentSpeechTherapy()">Далее</button></div>
+  </div>
+
+  <div id="page25" class="container hidden">
+    <h2>Результаты и рекомендации</h2>
+    <div id="conclusion" class="result-box"></div>
+    <div class="button-container"><button class="btn-back" onclick="goBackFromResult()">Назад</button><button class="btn-next" onclick="resetForm()">Повторить тестирование</button></div>
+  </div>
+
+<script>
+const SCALE_QUESTIONS = [
+  {id:'soundReaction', title:'Насколько ребенок реагирует на бытовые звуки?', subtitle:'Оцените реакцию ребенка на обычные звуки окружающей среды: голос, шум воды, звонок, хлопок двери, звук игрушек.', scale:['Реакция на бытовые звуки отсутствует.','Реакция появляется крайне редко и только на очень выраженные звуки.','Реагирует на отдельные громкие звуки, но часто не замечает обычные бытовые звуки.','Реакция нестабильная: может заметить звук, но часто не реагирует.','Реагирует примерно на половину бытовых звуков.','Реакция есть, но требуется повторение или усиление звука.','Чаще реагирует на бытовые звуки, но бывают пропуски.','Реагирует на большинство бытовых звуков.','Реагирует стабильно, единичные сомнения.','Почти всегда реагирует на бытовые звуки.','Стабильно реагирует на бытовые звуки в соответствии с возрастом.']},
+  {id:'whisperReaction', title:'Насколько ребенок реагирует на тихие звуки и шепот?', subtitle:'Оцените реакцию ребенка на тихие звуки, шепот и негромкое обращение на небольшом расстоянии.', scale:['Не реагирует на тихие звуки и шепот.','Реагирует только в исключительных случаях.','Замечает тихие звуки крайне редко.','Иногда реагирует, если дополнительно привлечь внимание.','Реагирует нестабильно, примерно в половине ситуаций.','Реагирует на тихие звуки, но часто нужен повтор.','Чаще реагирует, но не всегда.','Реагирует на большинство тихих звуков и обращений.','Почти всегда реагирует на тихие звуки.','Реакция стабильная, единичные сомнения.','Уверенно реагирует на тихие звуки и шепот.']},
+  {id:'differentLoudnessReaction', title:'Насколько ребенок реагирует на звуки разной громкости?', subtitle:'Оцените, замечает ли ребенок не только громкие, но и обычные, умеренные и тихие звуки в повседневной обстановке.', scale:['Реагирует только на очень громкие звуки или не реагирует вовсе.','Почти всегда замечает только очень громкие звуки.','Чаще реагирует только на громкие звуки.','Иногда замечает звуки средней громкости.','Реагирует на средние звуки нестабильно.','Реагирует на средние звуки, но тихие часто не замечает.','Чаще реагирует на звуки разной громкости.','Хорошо реагирует на громкие и средние, иногда на тихие.','Почти всегда реагирует на звуки разной громкости.','Реакция стабильная, единичные сомнения.','Стабильно реагирует на звуки разной громкости.']},
+  {id:'nameResponse', title:'Насколько ребенок откликается на имя и обращение?', subtitle:'Оцените, насколько стабильно ребенок реагирует, когда к нему обращаются или зовут по имени.', scale:['Не откликается на имя и обращение.','Откликается крайне редко.','Отклик появляется редко и нестабильно.','Иногда откликается, чаще после повторов.','Откликается примерно в половине ситуаций.','Откликается, но часто требуется повтор или усиление голоса.','Чаще откликается, но бывают пропуски.','Откликается в большинстве бытовых ситуаций.','Почти всегда откликается.','Откликается стабильно, единичные сомнения.','Стабильно откликается на имя и обращение.']},
+  {id:'pointingGesture', title:'Насколько ребенок использует указательный жест для общения?', subtitle:'Оцените, использует ли ребенок указательный жест, чтобы попросить, показать интересный объект или привлечь внимание взрослого.', scale:['Указательный жест отсутствует.','Жест появляется крайне редко.','Иногда тянет руку, но не использует указание как общение.','Редко показывает предметы и чаще только для просьбы.','Использует жест нестабильно.','Иногда показывает для просьбы или привлечения внимания.','Чаще использует указательный жест в бытовых ситуациях.','Использует жест для просьбы и иногда для совместного внимания.','Почти всегда использует жест по назначению.','Активно использует жест, единичные сомнения.','Указательный жест сформирован и используется для общения.']},
+  {id:'pronunciation', title:'Насколько разборчива речь ребенка?', subtitle:'Оцените, насколько речь понятна близким и малознакомым людям с учетом возраста.', scale:['Речь практически неразборчива.','Понятны только отдельные звуки или слова.','Речь понятна только близким и с большим трудом.','Много искажений, смысл часто непонятен.','Речь понятна частично.','Речь в целом понятна близким, но трудна для окружающих.','Речь чаще понятна, но есть заметные нарушения.','Речь понятна большинству людей, отдельные трудности сохраняются.','Разборчивость близка к возрастной норме.','Речь почти полностью разборчива.','Речь разборчива в соответствии с возрастом.']},
+  {id:'voice', title:'Насколько нормально звучит голос ребенка?', subtitle:'Оцените наличие гнусавости, осиплости, хрипоты или стойкого изменения голоса.', scale:['Голос постоянно резко изменен.','Выраженная осиплость/гнусавость/хрипота почти всегда.','Нарушение голоса выражено и частое.','Голос часто звучит необычно.','Изменения голоса умеренные.','Нарушения голоса появляются периодически.','Голос чаще обычный, но бывают заметные изменения.','Небольшие изменения голоса иногда.','Голос почти всегда обычный.','Единичные сомнения по звучанию голоса.','Голос звучит обычно, без заметных нарушений.']},
+  {id:'fluency', title:'Насколько плавная речь ребенка?', subtitle:'Оцените частоту запинок, повторов, растягиваний звуков или блоков в речи.', scale:['Выраженные постоянные запинки или заикание.','Запинки очень частые и мешают общению.','Запинки частые.','Запинки заметные и регулярные.','Запинки умеренные.','Периодические запинки, не всегда мешают общению.','Запинки редкие, но заметные.','Небольшие запинки иногда.','Речь почти всегда плавная.','Единичные запинки без влияния на общение.','Речь плавная в соответствии с возрастом.']},
+  {id:'improvement', title:'Насколько заметны улучшения в развитии речи?', subtitle:'Оцените динамику улучшений речи за последние месяцы на фоне занятий.', scale:['Улучшений нет.','Улучшения практически отсутствуют.','Есть минимальные изменения.','Есть слабая положительная динамика.','Улучшения небольшие.','Есть незначительные, но заметные улучшения.','Улучшения умеренные.','Динамика хорошая.','Улучшения выраженные.','Очень заметная положительная динамика.','Улучшения выраженные и устойчивые.']},
+  {id:'communication', title:'Насколько эффективно ребенок использует речь для общения?', subtitle:'Оцените, насколько ребенок может обмениваться информацией с членами семьи и другими людьми с учетом возраста.', scale:['Обмен информацией практически невозможен.','Общение крайне затруднено даже с близкими.','Обмен информацией с близкими сильно затруднен.','Общение возможно только в отдельных ситуациях.','Общается с близкими, но с выраженными трудностями.','Эффективно общается в основном с членами семьи.','Может общаться с другими людьми при помощи взрослых.','Общение в целом эффективно, но есть заметные затруднения.','Общение почти соответствует возрасту.','Эффективно общается, есть единичные трудности.','Эффективно общается по возрасту с близкими и малознакомыми людьми.']}
+];
+
+const ACTIVE_MILESTONES = [
+  {age:1,text:'Ребенок реагирует и сосредотачивается на речи и общении со взрослым.'},{age:2,text:'Ребенок улыбается при общении со взрослым.'},{age:3,text:'Ребенок активно оживляется при общении со взрослым, появляется гуление.'},{age:4,text:'Ребенок по-разному реагирует на общение, смеется.'},{age:5,text:'Ребенок различает направление звука, появляется певучее гуление.'},{age:6,text:'У ребенка появился лепет.'},{age:7,text:'Ребенок готов к совместной игре со взрослым, реагирует на звук колокольчика.'},{age:8,text:'Ребенок реагирует на незнакомых людей, повторяет одинаковые слоги («ба-ба», «ма-ма» и т.п.).'},{age:9,text:'Ребенок общается с помощью жестов, играет в «ладушки».'},{age:10,text:'Ребенок понимает обращенную речь в знакомой ситуации, общается со взрослым через действия с предметами, использует 1–2 «лепетных слова», понятных при соотнесении с ситуацией.'},{age:11,text:'Ребенок использует 3 «лепетных слова», понятных при соотнесении с ситуацией.'},{age:12,text:'Ребенок использует 3–4 «лепетных слова», понятных при соотнесении с ситуацией, и понимает простую инструкцию, если ее сопровождают жестом.'},{age:15,text:'Словарный запас ребенка — до 6 слов, ребенок понимает простую инструкцию без жестов.'},{age:18,text:'Ребенок показывает одну часть тела, словарный запас — 7–20 слов.'},{age:21,text:'Ребенок показывает три части тела, использует фразы из 2 слов, словарный запас — около 20 слов.'},{age:24,text:'Ребенок показывает 5 частей тела, словарный запас — не менее 50 слов; может путать местоимения «я», «ты», «мне»; строит предложения из 2 слов.'},{age:30,text:'Ребенок правильно использует местоимения «я», «ты», «мне»; повторяет две цифры в правильной последовательности, понимает понятие «один».'},{age:36,text:'Словарный запас ребенка — не менее 250 слов, ребенок использует предложения из 3 слов, умеет использовать множественное число для существительных и глаголов. Ребенок называет свое имя, пол и возраст, понимает простые предлоги («под», «в») и выполняет задания с ними (например, «положи кубик под чашку», «положи кубик в коробку»).'},{age:48,text:'Ребенок строит предложения из 4–5 слов. Большинство звуков произносит правильно, хотя некоторые звуки еще могут вызывать трудности.'},{age:60,text:'Ребенок строит предложения из 5–6 слов и больше. Может рассказывать простые истории, поддерживать разговор и придерживаться темы разговора. Почти все звуки произносит правильно.'},{age:72,text:'Ребенок строит сложные предложения, соединяя мысли союзами («и», «или», «потому что»). Правильно произносит все звуки родного языка.'},{age:84,text:'Речь ребенка связная и развернутая. Ребенок правильно строит предложения (с точки зрения грамматики) и правильно произносит все звуки.'}
+];
+const PASSIVE_MILESTONES = [
+  {age:3,text:'Ребенок прислушивается к голосу взрослого, адекватно реагирует на интонацию, узнает знакомые голоса.'},{age:7,text:'Ребенок понимает отдельные инструкции и выполняет некоторые словесные команды («поцелуй маму», «где папа?», «дай ручку», «нельзя» и т.д.).'},{age:11,text:'Ребенок понимает названия отдельных предметов.'},{age:12,text:'Ребенок понимает простую инструкцию, если ее сопровождают жестом.'},{age:15,text:'Ребенок узнает изображения отдельных предметов.'},{age:18,text:'Ребенок узнает изображения отдельных предметов на сюжетных картинках.'},{age:24,text:'Ребенок понимает двухступенчатую инструкцию.'},{age:30,text:'Ребенок понимает обозначения действий в разных ситуациях («покажи, кто сидит, кто спит»), понимает двухступенчатые инструкции («пойди в кухню и принеси чашку»), понимает значение предлогов в привычной ситуации («на чем ты сидишь?»). Ребенок может устанавливать простые причинно-следственные связи.'},{age:36,text:'Ребенок понимает короткие рассказы и сказки, прочитанные взрослым, со зрительной опорой и без нее.'},{age:48,text:'Ребенок понимает простые вопросы и многоступенчатые инструкции.'},{age:60,text:'Ребенок понимает и выполняет сложные инструкции и отвечает на сложные вопросы.'},{age:72,text:'Ребенок понимает и использует сравнения, противопоставления и причинно-следственные связи.'},{age:84,text:'Ребенок понимает и может обсуждать абстрактные идеи и эмоции. Улучшаются навыки анализа и понимания информации.'}
+];
+
+let answers = { scales:{}, speechTherapist:'', currentSpeechTherapy:'', improvementAvailable:0, activeDelay:0, passiveDelay:0 };
+let pageHistory = [];
+let currentScaleIndex = 0;
+let ageInMonths = 0;
+
+function goToPage(pageNumber, addToHistory = true){
+  if(addToHistory && (pageHistory.length === 0 || pageHistory[pageHistory.length - 1] !== pageNumber)) pageHistory.push(pageNumber);
+  document.querySelectorAll('.container').forEach(page => page.classList.add('hidden'));
+  const currentPage = document.getElementById('page' + pageNumber);
+  if(currentPage) currentPage.classList.remove('hidden');
+}
+function goBackToPage(){ if(pageHistory.length > 1){ pageHistory.pop(); goToPage(pageHistory[pageHistory.length - 1], false); } }
+function calculateAgeInMonths(){
+  const birthDateInput = document.getElementById('birthDate').value;
+  const surveyDateInput = document.getElementById('surveyDate').value;
+  if(!birthDateInput) return null;
+  const birthDate = new Date(birthDateInput);
+  const surveyDate = surveyDateInput ? new Date(surveyDateInput) : new Date();
+  let months = (surveyDate.getFullYear() - birthDate.getFullYear()) * 12 + surveyDate.getMonth() - birthDate.getMonth();
+  if(surveyDate.getDate() < birthDate.getDate()) months--;
+  return months;
+}
+function validateBirthDate(){
+  const error = document.getElementById('birthDateError');
+  if(error){ error.style.display = 'none'; error.textContent = ''; }
+  const birthDateInput = document.getElementById('birthDate').value;
+  if(!birthDateInput){ const msg = 'Дата рождения ребенка не заполнена. Пожалуйста, заполните её.'; if(error){ error.textContent = msg; error.style.display = 'block'; } alert(msg); return false; }
+  ageInMonths = calculateAgeInMonths();
+  if(ageInMonths < 12 || ageInMonths > 84){ const msg = 'Возраст ребенка не соответствует диапазону анкетирования 1–7 лет.'; if(error){ error.textContent = msg; error.style.display = 'block'; } alert(msg); return false; }
+  renderMilestones('page8Questions', ACTIVE_MILESTONES, 'activeMilestone');
+  renderMilestones('page9Questions', PASSIVE_MILESTONES, 'passiveMilestone');
+  return true;
+}
+function findClosestIndex(items, age){
+  let index = 0;
+  for(let i = 0; i < items.length; i++){
+    if(items[i].age <= age) index = i;
+  }
+  return index;
+}
+function renderMilestones(containerId, items, name){
+  const container = document.getElementById(containerId);
+  const closestIndex = findClosestIndex(items, ageInMonths);
+  container.innerHTML = '';
+  for(let i = closestIndex - 4; i <= closestIndex + 1; i++){
+    if(i >= 0 && i < items.length){
+      const label = document.createElement('label');
+      label.className = 'checkbox-label';
+      label.innerHTML = `<input type="checkbox" name="${name}" data-age="${items[i].age}" data-index="${i}"> ${items[i].text}`;
+      container.appendChild(label);
+    }
+  }
+}
+function goToScalePage(index){
+  currentScaleIndex = index;
+  const q = SCALE_QUESTIONS[currentScaleIndex];
+  if(answers.scales[q.id] === undefined) answers.scales[q.id] = 5;
+  document.querySelectorAll('.container').forEach(page => page.classList.add('hidden'));
+  document.getElementById('scalePage').classList.remove('hidden');
+  document.getElementById('scaleProgress').style.width = `${((currentScaleIndex + 1) / SCALE_QUESTIONS.length) * 100}%`;
+  document.getElementById('scaleTitle').textContent = q.title;
+  document.getElementById('scaleSubtitle').textContent = q.subtitle;
+  document.getElementById('scaleInput').value = answers.scales[q.id];
+  updateScaleValue(answers.scales[q.id]);
+  document.getElementById('scaleTable').innerHTML = q.scale.map((text,i)=>`<div class="scale-num">${i}</div><div>${text}</div>`).join('');
+}
+function updateScaleValue(value){
+  const q = SCALE_QUESTIONS[currentScaleIndex];
+  answers.scales[q.id] = Number(value);
+  document.getElementById('scaleValue').textContent = value;
+  document.getElementById('currentDesc').textContent = q.scale[Number(value)];
+}
+function scaleNext(){
+  if(currentScaleIndex < 4) goToScalePage(currentScaleIndex + 1);
+  else if(currentScaleIndex === 4) goToPage(8);
+  else if(currentScaleIndex >= 5 && currentScaleIndex < 7) goToScalePage(currentScaleIndex + 1);
+  else if(currentScaleIndex === 7) goToPage(17);
+  else if(currentScaleIndex === 8) goToScalePage(9);
+  else if(currentScaleIndex === 9) calculateResults();
+}
+function scaleBack(){
+  if(currentScaleIndex > 5 && currentScaleIndex <= 7) goToScalePage(currentScaleIndex - 1);
+  else if(currentScaleIndex === 5) goToPage(9);
+  else if(currentScaleIndex === 8) goToPage(18);
+  else if(currentScaleIndex === 9){
+    if(answers.improvementAvailable) goToScalePage(8);
+    else if(answers.speechTherapist === 'yes') goToPage(18);
+    else goToPage(17);
+  }
+  else if(currentScaleIndex > 0) goToScalePage(currentScaleIndex - 1);
+  else goToPage(2);
+}
+function handleSpeechTherapist(){
+  const v = document.querySelector('input[name="speechTherapist"]:checked')?.value;
+  if(!v){ alert('Выберите вариант ответа.'); return; }
+  answers.speechTherapist = v;
+  if(v === 'yes') goToPage(18);
+  else { answers.currentSpeechTherapy = 'no'; answers.improvementAvailable = 0; delete answers.scales.improvement; goToScalePage(9); }
+}
+function handleCurrentSpeechTherapy(){
+  const v = document.querySelector('input[name="currentSpeechTherapy"]:checked')?.value;
+  if(!v){ alert('Выберите вариант ответа.'); return; }
+  answers.currentSpeechTherapy = v;
+  if(v === 'yes'){ answers.improvementAvailable = 1; goToScalePage(8); }
+  else { answers.improvementAvailable = 0; delete answers.scales.improvement; goToScalePage(9); }
+}
+function goBackFromResult(){
+  goToScalePage(9);
+}
+function calculateStepDifference(selector, items){
+  let closestIndex = -1, closestCheckedIndex = -1;
+  for(let i = 0; i < items.length; i++){ if(items[i].age <= ageInMonths) closestIndex = i; }
+  const checked = [...document.querySelectorAll(selector)].filter(ch => ch.checked);
+  if(checked.length === 0) return 4;
+  checked.forEach(ch => { const idx = Number(ch.dataset.index); if(items[idx].age > ageInMonths) closestCheckedIndex = closestIndex; else if(idx > closestCheckedIndex) closestCheckedIndex = idx; });
+  if(closestIndex < 0 || closestCheckedIndex < 0) return 4;
+  return Math.min(4, Math.max(0, closestIndex - closestCheckedIndex));
+}
+function toFourBit(value){
+  const safeValue = Math.max(0, Math.min(15, Number(value) || 0));
+  return safeValue.toString(2).padStart(4,'0').split('').map(Number);
+}
+
+function ageToCode(ageMonths){
+  const code = Math.floor((ageMonths - 12) / (84 - 12) * 15);
+  return Math.max(0, Math.min(15, code));
+}
+
+function buildInputVector(){
+  answers.activeDelay = calculateStepDifference('input[name="activeMilestone"]', ACTIVE_MILESTONES);
+  answers.passiveDelay = calculateStepDifference('input[name="passiveMilestone"]', PASSIVE_MILESTONES);
+
+
+  const improvementValue = answers.improvementAvailable ? (answers.scales.improvement ?? 5) : 5;
+
+  const rawValues = [
+    ageToCode(ageInMonths),
+    answers.scales.soundReaction ?? 5,
+    answers.scales.whisperReaction ?? 5,
+    answers.scales.differentLoudnessReaction ?? 5,
+    answers.scales.nameResponse ?? 5,
+    answers.scales.pointingGesture ?? 5,
+    answers.activeDelay,
+    answers.passiveDelay,
+    answers.scales.pronunciation ?? 5,
+    answers.scales.voice ?? 5,
+    answers.scales.fluency ?? 5,
+    improvementValue,
+    answers.scales.communication ?? 5
+  ];
+
+  return rawValues.flatMap(value => toFourBit(value));
+}
+
+function sigmoid(x){ return 1 / (1 + Math.exp(-x)); }
+
+const MODEL_FILE = 'speech_model_weights.json';
+let modelData = null;
+
+const outputLabels = [
+  "norm",
+  "mild_speech_issue",
+  "moderate_speech_issue",
+  "severe_speech_issue",
+  "mild_delay",
+  "speech_delay",
+  "pronunciation_issue",
+  "voice_issue",
+  "fluency_issue",
+  "speech_therapist",
+  "neurologist",
+  "surdologist",
+  "hearing_test",
+  "ent",
+  "psychologist",
+  "psychiatrist",
+  "autism_screening",
+  "specialized_center",
+  "specialized_psychiatric_center"
+];
+
+const outputNames = {
+  norm: "Развитие речи находится в пределах возрастной нормы",
+  mild_speech_issue: "Вероятно легкое речевое расстройство",
+  moderate_speech_issue: "Вероятно умеренно выраженное речевое расстройство",
+  severe_speech_issue: "Вероятны выраженные речевые расстройства",
+  mild_delay: "Вероятно незначительное отставание речевого развития",
+  speech_delay: "Вероятно отставание речевого развития",
+  pronunciation_issue: "Вероятно расстройство произносительной стороны речи",
+  voice_issue: "Вероятно расстройство голоса",
+  fluency_issue: "Вероятно расстройство темпо-ритмической стороны речи",
+  speech_therapist: "Консультация логопеда",
+  neurologist: "Консультация невролога",
+  surdologist: "Консультация сурдолога",
+  hearing_test: "Инструментальная проверка слуха",
+  ent: "Консультация отоларинголога",
+  psychologist: "Консультация психолога",
+  psychiatrist: "Консультация психиатра",
+  autism_screening: "Онлайн-опросник M-CHAT-R",
+  specialized_center: "Областной детский центр патологии речи",
+  specialized_psychiatric_center: "Филиал «Детство» СОКПБ"
+};
+
+async function loadModel(){
+  if(modelData) return modelData;
+
+  const response = await fetch(MODEL_FILE);
+  if(!response.ok){
+    throw new Error('Не удалось загрузить файл модели: ' + MODEL_FILE);
+  }
+
+  modelData = await response.json();
+
+  if(!modelData.weights || !modelData.biases){
+    throw new Error('Файл модели имеет неверный формат.');
+  }
+
+  if(modelData.architecture && modelData.architecture.input_neurons !== 52){
+    console.warn('Ожидалось 52 входа, но в модели указано:', modelData.architecture.input_neurons);
+  }
+
+  console.log('Нейросетевая модель загружена:', modelData);
+  return modelData;
+}
+
+function runPerceptron(inputs){
+  if(!modelData){
+    throw new Error('Модель еще не загружена.');
+  }
+
+  if(inputs.length !== 52){
+    throw new Error('Ожидалось 52 входных значения, получено: ' + inputs.length);
+  }
+
+  const weights = modelData.weights;
+  const biases = modelData.biases;
+  const outputs = [];
+
+  for(let j = 0; j < biases.length; j++){
+    let sum = biases[j];
+
+    for(let i = 0; i < inputs.length; i++){
+      sum += inputs[i] * weights[i][j];
+    }
+
+    outputs.push(sigmoid(sum));
+  }
+
+  return outputs;
+}
+
+function outputsToMap(outputs){
+  const result = {};
+  outputLabels.forEach((label, index) => {
+    result[label] = outputs[index] ?? 0;
+  });
+  return result;
+}
+
+function activeOutputs(outputMap, threshold = 0.5){
+  return outputLabels.filter(label => outputMap[label] >= threshold);
+}
+
+function calculateFollowUpMonths(){
+  if(ageInMonths <= 12) return 1;
+  if(ageInMonths <= 24) return 3;
+  if(ageInMonths <= 36) return 6;
+  return 12;
+}
+
+function buildMainConclusion(outputMap){
+  if(outputMap.norm >= 0.5 && outputMap.severe_speech_issue < 0.5 && outputMap.speech_delay < 0.5){
+    return {
+      text: 'Развитие речи Вашего ребенка находится в пределах возрастной нормы.',
+      className: ''
+    };
+  }
+
+  if(outputMap.severe_speech_issue >= 0.5){
+    return {
+      text: 'Вероятны выраженные речевые расстройства.',
+      className: 'danger'
+    };
+  }
+
+  if(outputMap.moderate_speech_issue >= 0.5){
+    return {
+      text: 'Вероятно умеренно выраженное речевое расстройство.',
+      className: 'warn'
+    };
+  }
+
+  if(outputMap.mild_speech_issue >= 0.5){
+    return {
+      text: 'Вероятно легкое речевое расстройство.',
+      className: 'warn'
+    };
+  }
+
+  if(outputMap.speech_delay >= 0.5){
+    return {
+      text: 'Вероятно отставание речевого развития.',
+      className: 'warn'
+    };
+  }
+
+  if(outputMap.mild_delay >= 0.5){
+    return {
+      text: 'Вероятно незначительное отставание речевого развития.',
+      className: 'warn'
+    };
+  }
+
+  return {
+    text: 'Рекомендации по результатам анкетирования сформированы ниже.',
+    className: ''
+  };
+}
+
+function buildRecommendations(outputMap){
+  const recs = [];
+  const add = (text) => {
+    if(text && !recs.includes(text)) recs.push(text);
+  };
+
+  if(answers.currentSpeechTherapy === 'yes'){
+    add('Продолжайте занятия с логопедом.');
+  } else if(outputMap.speech_therapist >= 0.5){
+    add('Рекомендуется консультация логопеда.');
+  }
+
+  if(answers.improvementAvailable && (answers.scales.improvement ?? 10) <= 4){
+    add('Рекомендуется консультация невролога.');
+  }
+
+  if(outputMap.hearing_test >= 0.5){
+    add('Рекомендуется консультация отоларинголога – сурдолога с проведением инструментального обследования слуха.');
+  } else if(outputMap.surdologist >= 0.5){
+    add('Необходимо проверить слух. Нужна консультация сурдолога.');
+  }
+
+  if(outputMap.neurologist >= 0.5){
+    add('Рекомендуется консультация невролога.');
+  }
+
+  if(outputMap.ent >= 0.5){
+    add('Рекомендуется консультация отоларинголога.');
+  }
+
+  if(outputMap.psychologist >= 0.5){
+    add('Рекомендуется консультация психолога.');
+  }
+
+  if(outputMap.psychiatrist >= 0.5){
+    add('Рекомендуется консультация психиатра.');
+  }
+
+  const mchatByDirectRule = ageInMonths >= 18
+    && (answers.scales.nameResponse ?? 10) <= 5
+    && (answers.scales.pointingGesture ?? 10) <= 5;
+
+  if(outputMap.autism_screening >= 0.5 || mchatByDirectRule){
+    add('Рекомендуем пройти онлайн-версию опросника M-CHAT-R, который позволяет определить риск аутизма у ребенка: <a href="https://test.autism.help/" target="_blank" rel="noopener noreferrer">https://test.autism.help/</a>');
+  }
+
+  const needsSpeechCenter = outputMap.specialized_center >= 0.5;
+  const needsPsychiatricCenter = outputMap.specialized_psychiatric_center >= 0.5;
+
+  if(needsSpeechCenter && needsPsychiatricCenter){
+    add('Целесообразно обследование в областном детском центре патологии речи или филиале «Детство» СОКПБ.');
+  } else if(needsSpeechCenter){
+    add('Целесообразно обследование в областном детском центре патологии речи.');
+  } else if(needsPsychiatricCenter){
+    add('Целесообразно обследование в филиале «Детство» СОКПБ.');
+  }
+
+  const hasHeavyRoute = outputMap.severe_speech_issue >= 0.5
+    || outputMap.speech_delay >= 0.5
+    || outputMap.specialized_center >= 0.5
+    || outputMap.specialized_psychiatric_center >= 0.5
+    || outputMap.psychiatrist >= 0.5
+    || outputMap.hearing_test >= 0.5
+    || outputMap.surdologist >= 0.5
+    || outputMap.ent >= 0.5
+    || outputMap.autism_screening >= 0.5;
+
+  const canRecommendRetesting = outputMap.norm >= 0.5
+    || (outputMap.mild_speech_issue >= 0.5 && !hasHeavyRoute)
+    || (answers.currentSpeechTherapy === 'yes' && !hasHeavyRoute);
+
+  if(canRecommendRetesting){
+    add(`Рекомендуем провести повторное анкетирование через ${calculateFollowUpMonths()} месяцев.`);
+  }
+
+  return recs;
+}
+
+async function calculateResults(){
+  try {
+    await loadModel();
+
+    const vector = buildInputVector();
+    const outputs = runPerceptron(vector);
+    const outputMap = outputsToMap(outputs);
+    const main = buildMainConclusion(outputMap);
+    const recs = buildRecommendations(outputMap);
+
+    document.getElementById('conclusion').innerHTML = `
+      <h3 class="${main.className}">${main.text}</h3>
+      <h3>Рекомендации</h3>
+      <ul>${recs.map(r => `<li>${r}</li>`).join('')}</ul>
+    `;
+
+    goToPage(25, false);
+  } catch(error){
+    console.error(error);
+    alert('Не удалось выполнить нейросетевой расчет. Проверьте, что файл speech_model_weights.json лежит рядом с HTML-файлом.');
+  }
+}
+
+function resetForm(){ location.reload(); }
+document.addEventListener('DOMContentLoaded', function(){ const today = new Date(); document.getElementById('surveyDate').value = today.toISOString().slice(0,10); goToPage(1); loadModel().catch(error => console.warn(error.message)); });
+</script>
+</body>
+</html>
