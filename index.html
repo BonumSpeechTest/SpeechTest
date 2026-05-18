@@ -514,7 +514,7 @@ async function calculateResults(){
 
     document.getElementById('conclusion').innerHTML = `
       <h3 class="${main.className}">${main.text}</h3>
-      <h3>Рекомендации</h3>
+      <h3>Рекомендации:</h3>
       <ul>${recs.map(r => `<li>${r}</li>`).join('')}</ul>
     `;
 
