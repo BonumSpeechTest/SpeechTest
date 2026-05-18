@@ -495,13 +495,9 @@ function buildRecommendations(outputMap){
     || outputMap.ent >= 0.5
     || outputMap.autism_screening >= 0.5;
 
-  const canRecommendRetesting = outputMap.norm >= 0.5
-    || (outputMap.mild_speech_issue >= 0.5 && !hasHeavyRoute)
-    || (answers.currentSpeechTherapy === 'yes' && !hasHeavyRoute);
-
-  if(canRecommendRetesting){
-    add(`Рекомендуем провести повторное анкетирование через ${calculateFollowUpMonths()} месяцев.`);
-  }
+  if(!hasHeavyRoute){
+  add(`Рекомендуем провести повторное анкетирование через ${calculateFollowUpMonths()} месяцев.`);
+}
 
   return recs;
 }
